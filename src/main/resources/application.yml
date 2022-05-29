@@ -1,0 +1,14 @@
+server:
+  port: 8282
+spring:
+  application: 
+    name: ms-gateway
+  cloud:
+    gateway:
+      routers:
+        - id: ms
+          uri: lb://MS
+          predicates:
+            - Path=/ms/**
+          filters:
+            - RewritePath=/ms/(?<remaining>.*), /$\{remaining}
